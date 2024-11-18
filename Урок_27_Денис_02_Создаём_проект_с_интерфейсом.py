@@ -12,9 +12,9 @@ def exchange():
             response = requests.get('https://open.er-api.com/v6/latest/USD')
             response.raise_for_status()
             data = response.json()
-            if code in data['retes']:
+            if code in data['rates']:
                 exhange_rate = data['rates'][code]
-                mb.showinfo("Курс обмена", f"Курс: {exhange_rate} {code} за 1 доллар")
+                mb.showinfo("Курс обмена", f"Курс: {exhange_rate:.2f} {code} за 1 доллар")
             else:
                 mb.showerror("Ошибка!", f"Валюта {code} не найдена!")
         except Exception as e:
@@ -29,7 +29,7 @@ window.geometry("360x180")
 
 Label(text="Введите код валюты.").pack(padx=10, pady=10)
 
-entry = Entry
+entry = Entry()
 entry.pack(padx=10, pady=10)
 
 Button(text="Получить курс обмена к доллару", command=exchange).pack(padx=10, pady=10)
